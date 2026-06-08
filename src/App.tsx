@@ -48,18 +48,20 @@ function App() {
         </div>
       </header>
 
-      <div className="flex flex-row-reverse w-full">
-        <div className="w-[60%] flex flex-col overflow-y-auto border-l border-zinc-800 p-4 gap-4">
+      <div className="flex flex-col md:flex-row-reverse w-full">
+        <div className="w-full md:w-[60%] flex flex-col overflow-y-auto border-l border-zinc-800 p-4 gap-4">
           <BlockList />
         </div>
 
-        <div className="w-[40%] overflow-y-auto min-h-sceen bg-zinc-900">
+        <div className=" w-full md:w-[40%] overflow-y-auto min-h-sceen bg-zinc-900">
           <div className="sticky top-0 px-6 py-3 border-b border-zinc-800 bg-zinc-900 z-10">
             <span className="text-xs text-zinc-500 uppercase tracking-widest">
               پیش‌نمایش
             </span>
           </div>
-          <Preview />
+          <div className="min-h-screen">
+            <Preview />
+          </div>
         </div>
       </div>
     </div>
