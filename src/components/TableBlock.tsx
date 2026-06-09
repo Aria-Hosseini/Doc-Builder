@@ -2,6 +2,8 @@ import type { Block } from "../types/basetypes";
 import useDocStore from "../store/useDocStore";
 import { useRef } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
+import { IoTrashBin } from "react-icons/io5";
 
 interface Props {
   block: Block;
@@ -16,6 +18,8 @@ export default function TableBlock({ block }: Props) {
     removeTableCol,
     removeBlock,
   } = useDocStore();
+
+  const { t } = useTranslation();
 
   const tableData = block.tableData ?? [];
   const colCount = tableData[0]?.length ?? 0;
@@ -52,14 +56,14 @@ export default function TableBlock({ block }: Props) {
     <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-4 flex flex-col gap-3 m-5">
       <div className="flex items-center justify-between">
         <span className="text-xs text-zinc-500 border border-zinc-700 rounded-lg px-2 py-1">
-          جدول {tableData.length} × {colCount}
+          {t("table_editor.table_dimension")} {tableData.length} × {colCount}
         </span>
         <button
           onClick={() => removeBlock(block.id)}
           className="text-xs text-zinc-500 flex gap-2 items-center hover:text-red-400 border border-zinc-700 hover:border-red-500 rounded-lg px-3 py-1.5 transition-colors cursor-pointer"
         >
+          {t("table_editor.delete_block")}
           <FaRegTrashAlt size={13} />
-          حذف بلاک
         </button>
       </div>
 
@@ -81,9 +85,9 @@ export default function TableBlock({ block }: Props) {
                       <button
                         onClick={() => removeTableCol(block.id, ci)}
                         className="text-zinc-600 hover:text-red-400 transition-colors cursor-pointer text-xs leading-none"
-                        title="حذف ستون"
+                        title={t("table_editor.delete_column")}
                       >
-                        ×
+                        <IoTrashBin />
                       </button>
                     )}
                   </div>
@@ -105,9 +109,9 @@ export default function TableBlock({ block }: Props) {
                         <button
                           onClick={() => removeTableRow(block.id, ri)}
                           className="text-zinc-600 hover:text-red-400 transition-colors cursor-pointer text-xs leading-none"
-                          title="حذف ردیف"
+                          title={t("table_editor.delete_row")}
                         >
-                          ×
+                          <IoTrashBin />
                         </button>
                       )}
                     </div>
@@ -154,14 +158,14 @@ export default function TableBlock({ block }: Props) {
           className="flex items-center gap-2 text-xs text-zinc-400 hover:text-blue-400 border border-zinc-700 hover:border-blue-500 rounded-lg px-3 py-1.5 transition-colors cursor-pointer"
         >
           <span>+</span>
-          افزودن ردیف
+          {t("table_editor.add_row")}
         </button>
         <button
           onClick={() => addTableCol(block.id)}
           className="flex items-center gap-2 text-xs text-zinc-400 hover:text-blue-400 border border-zinc-700 hover:border-blue-500 rounded-lg px-3 py-1.5 transition-colors cursor-pointer"
         >
           <span>+</span>
-          افزودن ستون
+          {t("table_editor.add_column")}
         </button>
       </div>
     </div>

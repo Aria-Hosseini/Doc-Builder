@@ -4,11 +4,14 @@ import BlockEditor from "./BlockEditor";
 import TableBlock from "./TableBlock";
 import TablePicker from "./TablePicker";
 import { FiGrid } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
+import { RxFileText } from "react-icons/rx";
 
 export default function BlockList() {
   const { blocks, addBlock, addTableBlock } = useDocStore();
   const [showPicker, setShowPicker] = useState(false);
 
+  const { t } = useTranslation();
   const handleTableSelect = (rows: number, cols: number) => {
     addTableBlock(rows, cols);
     setShowPicker(false);
@@ -27,9 +30,10 @@ export default function BlockList() {
       <div className="flex gap-3 px-5 pb-5">
         <button
           onClick={addBlock}
-          className="flex-1 text-sm text-zinc-400 hover:text-blue-400 border border-dashed border-zinc-700 hover:border-blue-500 rounded-xl py-3 transition-colors cursor-pointer"
+          className="flex-1 flex items-center justify-center gap-2 text-sm text-zinc-400 hover:text-blue-400 border border-dashed border-zinc-700 hover:border-blue-500 rounded-xl py-3 transition-colors cursor-pointer"
         >
-          + افزودن بلاک متنی
+          <RxFileText size={18} />
+          {t("block_list.add_block")}
         </button>
 
         <button
@@ -37,7 +41,7 @@ export default function BlockList() {
           className="flex items-center gap-2 text-sm text-zinc-400 hover:text-blue-400 border border-dashed border-zinc-700 hover:border-blue-500 rounded-xl px-5 py-3 transition-colors cursor-pointer"
         >
           <FiGrid size={15} />
-          افزودن جدول
+          {t("block_list.add_table")}
         </button>
       </div>
 

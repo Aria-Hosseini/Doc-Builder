@@ -36,7 +36,7 @@ function App() {
           <span className="font-bold text-xl">{t("navbar.title")}</span>
           <button
             onClick={toggleLanguage}
-            className="px-3 py-1 text-xs font-semibold rounded border border-gray-700 bg-zinc-900 hover:bg-zinc-800 transition-colors"
+            className="px-3 py-1 cursor-pointer text-xs font-semibold rounded border border-gray-700 bg-zinc-900 hover:bg-zinc-800 transition-colors"
           >
             {i18n.language === "fa" ? "Eng" : "فا"}
           </button>

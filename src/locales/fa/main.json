@@ -1,7 +1,6 @@
 {
   "navbar": {
-    "title": "Doc Builder",
-    "add_block": "افزودن بلاک +"
+    "title": "Doc Builder"
   },
   "sidebar": {
     "preview": "پیش‌نمایش"
@@ -10,6 +9,20 @@
     "block_placeholder": "توضیحات بلاک...",
     "code_placeholder": "کد بلاک...",
     "has_code": "دارای کد است",
-    "delete_block": "حذف بلاک"
+    "delete_block": "حذف بلاک",
+    "rtl_buttom":"→ راست‌چین کن",
+    "ltr_buttom" : "← چپ‌چین کن"
+  },
+  "table_editor":{
+    "delete_block" : "حذف بلاک",
+    "table_dimension" : "جدول",
+    "add_column" :"افزودن ستون",
+    "add_row": "افزودن ردیف",
+    "delete_column" : "حذف ستون", 
+    "delete_row" : "حذف ردیف"
+  },
+  "block_list":{
+    "add_block" :"افزودن بلاک متنی",
+    "add_table":"افزودن بلاک جدول"
   }
 }

@@ -1,7 +1,6 @@
 {
   "navbar": {
-    "title": "Doc Builder",
-    "add_block": "Add Block +"
+    "title": "Doc Builder"
   },
   "sidebar": {
     "preview": "Preview"
@@ -10,6 +9,20 @@
     "block_placeholder": "Block description...",
     "code_placeholder": "Block code",
     "has_code": "Has code",
-    "delete_block": "Delete Block"
+    "delete_block": "Delete Block",
+    "rtl_buttom":"RTL →",
+    "ltr_buttom" : "LTR ←"
+  },
+  "table_editor":{
+    "delete_block" : "Delete Block",
+    "table_dimension" : "table",
+    "add_column" :"Add Column",
+    "add_row": "Add Row",
+    "delete_column" : "Delete Column", 
+    "delete_row" : "Delete Row"
+  },
+  "block_list":{
+    "add_block" :"Add Text Block",
+    "add_table":"Add Table Block"
   }
 }

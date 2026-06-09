@@ -25,7 +25,7 @@ export default function BlockEditor({ block }: Props) {
           onClick={() => updateBlock(block.id, "isRtL", !isRtl)}
           className="text-xs text-zinc-400 hover:text-blue-400 cursor-pointer border border-zinc-700 hover:border-blue-500 rounded-lg px-3 py-1.5 transition-colors"
         >
-          {isRtl ? "← چپ‌چین کن" : "→ راست‌چین کن"}
+          {isRtl ? t("editor.ltr_buttom") : t("editor.rtl_buttom")}
         </button>
       </div>
 
