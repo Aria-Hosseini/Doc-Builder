@@ -1,0 +1,15 @@
+{
+  "navbar": {
+    "title": "Doc Builder",
+    "add_block": "افزودن بلاک +"
+  },
+  "sidebar": {
+    "preview": "پیش‌نمایش"
+  },
+  "editor": {
+    "block_placeholder": "توضیحات بلاک...",
+    "code_placeholder": "کد بلاک...",
+    "has_code": "دارای کد است",
+    "delete_block": "حذف بلاک"
+  }
+}

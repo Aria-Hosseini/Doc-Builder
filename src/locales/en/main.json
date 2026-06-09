@@ -1,0 +1,15 @@
+{
+  "navbar": {
+    "title": "Doc Builder",
+    "add_block": "Add Block +"
+  },
+  "sidebar": {
+    "preview": "Preview"
+  },
+  "editor": {
+    "block_placeholder": "Block description...",
+    "code_placeholder": "Block code",
+    "has_code": "Has code",
+    "delete_block": "Delete Block"
+  }
+}
