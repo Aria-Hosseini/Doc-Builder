@@ -7,18 +7,47 @@ export const generateHTML = (blocks: Block[]) => {
     <div class="block">
       <div class="block-header">
         <span class="block-number">#${index + 1}</span>
+        <div class="divider"></div>
       </div>
 
       ${
-        block.description
+        block.type === "table" && block.tableData
           ? `
-        <p dir="rtl" class="description">${block.description}</p>
+        <div class="table-wrapper">
+          <table>
+            <tbody>
+              ${block.tableData
+                .map(
+                  (row, ri) => `
+                <tr class="${ri === 0 ? "header-row" : ""}">
+                  ${row
+                    .map((cell) =>
+                      ri === 0
+                        ? `<th>${escapeHTML(cell.content)}</th>`
+                        : `<td>${escapeHTML(cell.content)}</td>`,
+                    )
+                    .join("")}
+                </tr>
+              `,
+                )
+                .join("")}
+            </tbody>
+          </table>
+        </div>
       `
           : ""
       }
 
       ${
-        block.code
+        block.type !== "table" && block.description
+          ? `
+        <p dir="${block.isRtL ? "rtl" : "ltr"}" class="description">${block.description}</p>
+      `
+          : ""
+      }
+
+      ${
+        block.type !== "table" && block.code
           ? `
         <div class="code-wrapper">
           <div class="code-header">
@@ -29,7 +58,7 @@ export const generateHTML = (blocks: Block[]) => {
               <span class="dot green"></span>
             </div>
           </div>
-          <pre><code dir="ltr" >${escapeHTML(block.code)}</code></pre>
+          <pre><code dir="ltr">${escapeHTML(block.code)}</code></pre>
         </div>
       `
           : ""
@@ -40,7 +69,7 @@ export const generateHTML = (blocks: Block[]) => {
     .join("");
 
   return `<!DOCTYPE html>
-<html lang="fa" >
+<html lang="fa">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -90,6 +119,40 @@ export const generateHTML = (blocks: Block[]) => {
       padding: 0 4px;
     }
 
+    /* ── Table ── */
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid #3f3f46;
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      color: #d4d4d8;
+    }
+
+    tr.header-row {
+      background: #27272a;
+    }
+
+    tr:not(.header-row):nth-child(even) {
+      background: rgba(39, 39, 42, 0.4);
+    }
+
+    th, td {
+      border: 1px solid #3f3f46;
+      padding: 10px 16px;
+      text-align: left;
+    }
+
+    th {
+      font-weight: 600;
+      color: #e4e4e7;
+    }
+
+    /* ── Code ── */
     .code-wrapper {
       border: 1px solid #3f3f46;
       border-radius: 12px;
@@ -113,9 +176,9 @@ export const generateHTML = (blocks: Block[]) => {
 
     .dots { display: flex; gap: 6px; }
     .dot { width: 12px; height: 12px; border-radius: 50%; }
-    .dot.red    { background: rgba(239,68,68,0.6); }
-    .dot.yellow { background: rgba(234,179,8,0.6); }
-    .dot.green  { background: rgba(34,197,94,0.6); }
+    .dot.red    { background: rgba(239, 68, 68, 0.83); }
+    .dot.yellow { background: rgba(234, 178, 8, 0.89); }
+    .dot.green  { background: rgba(34, 197, 94, 0.85); }
 
     pre {
       background: #09090b;
@@ -126,7 +189,7 @@ export const generateHTML = (blocks: Block[]) => {
     code {
       font-family: monospace;
       font-size: 0.8rem;
-      color: #8ace1d;
+      color: #05DF65;
       white-space: pre;
     }
   </style>

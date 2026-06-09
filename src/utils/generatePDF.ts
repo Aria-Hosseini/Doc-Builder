@@ -1,6 +1,36 @@
 import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
 
+const expandOverflows = (root: HTMLElement) => {
+  const overflowEls = root.querySelectorAll<HTMLElement>("*");
+  const snapshots: { el: HTMLElement; overflow: string; width: string }[] = [];
+
+  overflowEls.forEach((el) => {
+    const style = window.getComputedStyle(el);
+    if (
+      style.overflowX === "auto" ||
+      style.overflowX === "scroll" ||
+      style.overflowY === "auto" ||
+      style.overflowY === "scroll"
+    ) {
+      snapshots.push({
+        el,
+        overflow: el.style.overflow,
+        width: el.style.width,
+      });
+      el.style.overflow = "visible";
+      el.style.width = "max-content";
+    }
+  });
+
+  return () => {
+    snapshots.forEach(({ el, overflow, width }) => {
+      el.style.overflow = overflow;
+      el.style.width = width;
+    });
+  };
+};
+
 export const generatePDF = async (elementToPrintId: string) => {
   const element = document.getElementById(elementToPrintId);
   if (!element)
@@ -15,13 +45,23 @@ export const generatePDF = async (elementToPrintId: string) => {
     parent.style.height = "auto";
   }
 
-  await new Promise((resolve) => setTimeout(resolve, 100));
+  const restoreOverflows = expandOverflows(element);
+
+  await new Promise((resolve) => setTimeout(resolve, 150));
 
   const imgData = await toPng(element, {
     quality: 1,
     pixelRatio: 2,
     backgroundColor: "#18181b",
+    width: element.scrollWidth,
+    height: element.scrollHeight,
+    style: {
+      width: element.scrollWidth + "px",
+      height: element.scrollHeight + "px",
+    },
   });
+
+  restoreOverflows();
 
   if (parent) {
     parent.style.overflow = prevOverflow;
