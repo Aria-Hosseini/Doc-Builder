@@ -8,8 +8,6 @@ import { TbFileTypeHtml } from "react-icons/tb";
 import { PiFilePdfBold } from "react-icons/pi";
 
 function App() {
-  const { addBlock } = useDocStore();
-
   const exportHTML = () => {
     const { blocks } = useDocStore.getState();
     const html = generateHTML(blocks);
@@ -38,12 +36,6 @@ function App() {
             className="text-sm bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-lg transition-colors cursor-pointer"
           >
             <TbFileTypeHtml size={22} />
-          </button>
-          <button
-            onClick={addBlock}
-            className="text-sm bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg transition-colors cursor-pointer"
-          >
-            + افزودن بلاک
           </button>
         </div>
       </header>

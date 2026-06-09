@@ -5,11 +5,11 @@ import ToggleSwitch from "./ui/ToggleSwitch";
 import syntaxes from "../data/sytaxes.json";
 import { FaRegTrashAlt } from "react-icons/fa";
 
-interface props {
+interface Props {
   block: Block;
 }
 
-export default function BlockEditor({ block }: props) {
+export default function BlockEditor({ block }: Props) {
   const { updateBlock, removeBlock } = useDocStore();
   const [hasCode, setHasCode] = useState(!!block.code);
   const langs = syntaxes.languages;
@@ -20,7 +20,7 @@ export default function BlockEditor({ block }: props) {
     <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-4 flex flex-col gap-3 m-5">
       <div dir="rtl" className="flex justify-between items-center">
         <button
-          onClick={() => updateBlock(block.id, "isRtL", !isRtl as any)}
+          onClick={() => updateBlock(block.id, "isRtL", !isRtl)}
           className="text-xs text-zinc-400 hover:text-blue-400 cursor-pointer border border-zinc-700 hover:border-blue-500 rounded-lg px-3 py-1.5 transition-colors"
         >
           {isRtl ? "← چپ‌چین کن" : "→ راست‌چین کن"}
