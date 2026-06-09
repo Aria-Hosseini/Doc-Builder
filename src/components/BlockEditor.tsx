@@ -4,6 +4,7 @@ import { useState } from "react";
 import ToggleSwitch from "./ui/ToggleSwitch";
 import syntaxes from "../data/sytaxes.json";
 import { FaRegTrashAlt } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   block: Block;
@@ -13,6 +14,7 @@ export default function BlockEditor({ block }: Props) {
   const { updateBlock, removeBlock } = useDocStore();
   const [hasCode, setHasCode] = useState(!!block.code);
   const langs = syntaxes.languages;
+  const { t } = useTranslation();
 
   const isRtl = block.isRtL !== undefined ? block.isRtL : true;
 
@@ -30,7 +32,7 @@ export default function BlockEditor({ block }: Props) {
       <textarea
         value={block.description}
         onChange={(e) => updateBlock(block.id, "description", e.target.value)}
-        placeholder="توضیحات بلاک..."
+        placeholder={t("editor.block_placeholder")}
         rows={3}
         dir={isRtl ? "rtl" : "ltr"}
         className={`w-full bg-zinc-800 text-zinc-100 placeholder-zinc-500 border border-zinc-700 rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:border-blue-500 transition-colors ${
@@ -39,13 +41,11 @@ export default function BlockEditor({ block }: Props) {
       />
 
       <ToggleSwitch
-        label="دارای کد است"
+        label={t("editor.has_code")}
         onChange={() =>
           setHasCode((prev) => {
             const newHasCode = !prev;
-            if (!newHasCode) {
-              updateBlock(block.id, "code", "");
-            }
+            if (!newHasCode) updateBlock(block.id, "code", "");
             return newHasCode;
           })
         }
@@ -69,7 +69,7 @@ export default function BlockEditor({ block }: Props) {
           <textarea
             value={block.code || ""}
             onChange={(e) => updateBlock(block.id, "code", e.target.value)}
-            placeholder="کد بلاک..."
+            placeholder={t("editor.code_placeholder")}
             rows={8}
             className="w-full bg-zinc-950 text-green-400 placeholder-zinc-600 border border-zinc-700 rounded-lg px-3 py-2 text-sm font-mono resize-y focus:outline-none focus:border-blue-500 transition-colors"
             dir="ltr"
@@ -83,7 +83,7 @@ export default function BlockEditor({ block }: Props) {
           className="text-xs text-balance text-zinc-500 flex flex-row-reverse gap-3 items-center hover:text-red-400 border border-zinc-700 hover:border-red-500 rounded-lg px-3 py-1.5 transition-colors cursor-pointer"
         >
           <FaRegTrashAlt size={14} />
-          حذف بلاک
+          {t("editor.delete_block")}
         </button>
       </div>
     </div>
