@@ -1,8 +1,12 @@
 <div dir="rtl">
 
-# 📄 Doc Builder
+# Doc Builder
 
 ابزاری ساده و کارآمد برای ساخت مستندات فنی — با پشتیبانی از بلاک‌های توضیحات و کد
+
+<div align="center">
+  <img src="/signature/img/banner2.jpg" alt="Doc Builder Preview" width="900" />
+</div>
 
 [🚀 مشاهده پروژه](https://aria-hosseini.github.io/Doc-Builder/)
 
@@ -12,15 +16,16 @@
 
 <div dir="rtl">
 
-## ✨ امکانات
+## امکانات
 
-- ➕ افزودن و حذف بلاک‌های مستند
-- 📝 نوشتن توضیحات برای هر بلاک
-- 💻 پشتیبانی از بلاک کد با هایلایت زبان‌های مختلف
-- 🌐 پشتیبانی از زبان‌های برنامه‌نویسی: JavaScript، TypeScript، JSX، Python، CSS
-- 🌙 رابط کاربری تاریک و مدرن
+- افزودن و حذف بلاک‌های مستند
+- نوشتن توضیحات برای هر بلاک
+- پشتیبانی از بلاک کد با هایلایت زبان‌های مختلف
+- پشتیبانی از زبان‌های برنامه‌نویسی: JavaScript، TypeScript، JSX، Python، CSS
+- رابط کاربری تاریک و مدرن
+- قابلیت ساخت جدول
 
-## 🛠 تکنولوژی‌ها
+## تکنولوژی‌ها
 
 | ابزار | نسخه |
 |-------|-------|
@@ -28,9 +33,9 @@
 | TypeScript | 5 |
 | Vite | 6 |
 | Tailwind CSS | 4 |
-| Zustand | — |
+| Zustand | 5 |
 
-## 🚀 اجرای محلی
+## اجرای محلی
 
 ```bash
 # کلون کردن ریپو
@@ -46,7 +51,7 @@ npm install
 npm run dev
 ```
 
-## 📦 بیلد
+## بیلد
 
 ```bash
 npm run build
@@ -56,21 +61,22 @@ npm run build
 
 ---
 
-# 📄 Doc Builder
+# Doc Builder
 
 A simple and efficient tool for building technical documentation — with support for description and code blocks.
 
 [🚀 Live Demo](https://aria-hosseini.github.io/Doc-Builder/)
 
-## ✨ Features
+## Features
 
-- ➕ Add and remove document blocks
-- 📝 Write descriptions for each block
-- 💻 Code blocks with multi-language support
-- 🌐 Supported languages: JavaScript, TypeScript, JSX, Python, CSS
-- 🌙 Dark and modern UI
+- Add and remove document blocks
+- Write descriptions for each block
+- Code blocks with multi-language support
+- Supported languages: JavaScript, TypeScript, JSX, Python, CSS
+- Dark and modern UI
+- create tables
 
-## 🛠 Tech Stack
+## Tech Stack
 
 | Tool | Version |
 |------|---------|
@@ -78,9 +84,9 @@ A simple and efficient tool for building technical documentation — with suppor
 | TypeScript | 5 |
 | Vite | 6 |
 | Tailwind CSS | 4 |
-| Zustand | — |
+| Zustand | 5 |
 
-## 🚀 Getting Started
+## Getting Started
 
 ```bash
 # Clone the repository
@@ -96,7 +102,7 @@ npm install
 npm run dev
 ```
 
-## 📦 Build
+## Build
 
 ```bash
 npm run build
