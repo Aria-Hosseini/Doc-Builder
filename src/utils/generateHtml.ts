@@ -1,6 +1,10 @@
 import type { Block } from "../types/basetypes";
+import type { Theme } from "../types/basetypes";
+import { themes } from "../data/themes";
 
-export const generateHTML = (blocks: Block[]) => {
+export const generateHTML = (blocks: Block[], theme: Theme) => {
+  const t = themes[theme];
+
   const blocksHTML = blocks
     .map(
       (block, index) => `
@@ -78,8 +82,8 @@ export const generateHTML = (blocks: Block[]) => {
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      background: #09090b;
-      color: #e4e4e7;
+      background: ${t.background};
+      color: ${t.text};
       font-family: sans-serif;
       padding: 2rem;
     }
@@ -109,12 +113,12 @@ export const generateHTML = (blocks: Block[]) => {
     .divider {
       flex: 1;
       height: 1px;
-      background: #27272a;
+      background: ${t.border};
     }
 
     .description {
       font-size: 0.875rem;
-      color: #d4d4d8;
+      color: ${t.text}
       line-height: 1.6;
       padding: 0 4px;
     }
@@ -157,6 +161,7 @@ export const generateHTML = (blocks: Block[]) => {
       border: 1px solid #3f3f46;
       border-radius: 12px;
       overflow: hidden;
+      background: ${t.text};
     }
 
     .code-header {
@@ -181,7 +186,7 @@ export const generateHTML = (blocks: Block[]) => {
     .dot.green  { background: rgba(34, 197, 94, 0.85); }
 
     pre {
-      background: #09090b;
+      background: ${t.background};
       padding: 16px;
       overflow-x: auto;
     }
@@ -189,7 +194,7 @@ export const generateHTML = (blocks: Block[]) => {
     code {
       font-family: monospace;
       font-size: 0.8rem;
-      color: #05DF65;
+      color: ${t.text};
       white-space: pre;
     }
   </style>

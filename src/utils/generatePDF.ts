@@ -1,5 +1,7 @@
 import { toPng } from "html-to-image";
 import { jsPDF } from "jspdf";
+import useDocStore from "../store/useDocStore";
+import { themes } from "../data/themes";
 
 const expandOverflows = (root: HTMLElement) => {
   const overflowEls = root.querySelectorAll<HTMLElement>("*");
@@ -49,10 +51,13 @@ export const generatePDF = async (elementToPrintId: string) => {
 
   await new Promise((resolve) => setTimeout(resolve, 150));
 
+  const { meta } = useDocStore.getState();
+  const backgroundColor = themes[meta.theme].background;
+
   const imgData = await toPng(element, {
     quality: 1,
     pixelRatio: 2,
-    backgroundColor: "#18181b",
+    backgroundColor,
     width: element.scrollWidth,
     height: element.scrollHeight,
     style: {

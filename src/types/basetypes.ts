@@ -4,6 +4,8 @@ export interface TableCell {
   content: string;
 }
 
+export type Theme = "dark" | "light" | "cream" | "green" | "yellow";
+
 export interface Block {
   id: string;
   type: BlockType;
@@ -18,6 +20,7 @@ export interface DocMeta {
   author: string;
   createdAt: string;
   title: string;
+  theme: Theme;
 }
 
 export interface Docstate {
@@ -42,4 +45,5 @@ export interface Docstate {
   removeTableCol: (id: Block["id"], colIndex: number) => void;
   removeBlock: (id: Block["id"]) => void;
   reorderBlocks: (from: number, to: number) => void;
+  updateMeta: (field: keyof DocMeta, value: string) => void;
 }

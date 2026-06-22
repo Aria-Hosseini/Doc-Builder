@@ -3,7 +3,8 @@
     "title": "Doc Builder"
   },
   "sidebar": {
-    "preview": "Preview"
+    "preview": "Preview",
+    "selectTheme" : "Select Theme"
   },
   "editor": {
     "block_placeholder": "Block description...",

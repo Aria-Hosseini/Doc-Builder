@@ -8,11 +8,12 @@ import { TbFileTypeHtml } from "react-icons/tb";
 import { PiFilePdfBold } from "react-icons/pi";
 
 import { useTranslation } from "react-i18next";
+import ThemePicker from "./components/ui/ThemePicker";
 
 function App() {
   const exportHTML = () => {
-    const { blocks } = useDocStore.getState();
-    const html = generateHTML(blocks);
+    const { blocks, meta } = useDocStore.getState();
+    const html = generateHTML(blocks, meta.theme);
     const blob = new Blob([html], { type: "text/html" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -63,10 +64,19 @@ function App() {
         </div>
 
         <div className=" w-full md:w-[40%] overflow-y-auto min-h-sceen bg-zinc-900">
-          <div className="sticky top-0 px-6 py-3 border-b border-zinc-800 bg-zinc-900 z-10">
+          <div className="sticky top-0 px-6 py-3 border-b border-zinc-800 bg-zinc-900 z-10 flex items-center justify-between">
             <span className="text-xs text-zinc-500 uppercase tracking-widest">
               {t("sidebar.preview")}
             </span>
+
+            <div className="flex items-center gap-3">
+              <span className="hidden md:block text-xs text-zinc-500 uppercase tracking-widest">
+                {t("sidebar.selectTheme")}
+              </span>
+              <div className="flex items-center gap-2">
+                <ThemePicker />
+              </div>
+            </div>
           </div>
           <div className="min-h-screen">
             <Preview />

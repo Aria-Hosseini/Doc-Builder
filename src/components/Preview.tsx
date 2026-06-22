@@ -2,12 +2,23 @@ import { forwardRef } from "react";
 import useDocStore from "../store/useDocStore";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { themes } from "../data/themes";
 
 const Preview = forwardRef<HTMLDivElement>((_, ref) => {
-  const { blocks } = useDocStore();
+  const { blocks, meta } = useDocStore();
+  const theme = themes[meta.theme];
 
   return (
-    <div id="preview" ref={ref} className="flex flex-col gap-6 p-6 bg-zinc-900">
+    <div
+      id="preview"
+      ref={ref}
+      className="flex flex-col gap-6 p-6 bg-zinc-900"
+      style={{
+        backgroundColor: theme.background,
+        color: theme.text,
+        border: theme.border,
+      }}
+    >
       {blocks.map((block, index) => {
         const isRtl = block.isRtL !== undefined ? block.isRtL : true;
 
@@ -63,6 +74,7 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
                     className={`text-zinc-300 text-sm leading-relaxed px-1 whitespace-pre-wrap ${
                       isRtl ? "text-right" : "text-left"
                     }`}
+                    style={{ color: theme.text }}
                   >
                     {block.description}
                   </p>

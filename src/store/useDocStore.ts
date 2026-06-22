@@ -14,6 +14,7 @@ const useDocStore = create<Docstate>()(
         title: "My Doc",
         author: "",
         createdAt: new Date().toISOString(),
+        theme: "dark",
       },
       blocks: [
         {
@@ -139,6 +140,14 @@ const useDocStore = create<Docstate>()(
           blocks.splice(to, 0, moved);
           return { blocks };
         }),
+
+      updateMeta: (field, value) =>
+        set((state) => ({
+          meta: {
+            ...state.meta,
+            [field]: value,
+          },
+        })),
     }),
     { name: "doc-builder" },
   ),
