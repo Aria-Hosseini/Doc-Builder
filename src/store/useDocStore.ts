@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Docstate, TableCell } from "../types/basetypes";
+import type { Docstate, TableCell, Theme } from "../types/basetypes";
 
 const makeEmptyTable = (rows: number, cols: number): TableCell[][] =>
   Array.from({ length: rows }, () =>
@@ -14,7 +14,7 @@ const useDocStore = create<Docstate>()(
         title: "My Doc",
         author: "",
         createdAt: new Date().toISOString(),
-        theme: "dark",
+        theme: "dark" as Theme,
       },
       blocks: [
         {
@@ -149,7 +149,7 @@ const useDocStore = create<Docstate>()(
           },
         })),
     }),
-    { name: "doc-builder" },
+    { name: "doc-builder", version: 1 },
   ),
 );
 
