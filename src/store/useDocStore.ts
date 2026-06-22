@@ -149,7 +149,13 @@ const useDocStore = create<Docstate>()(
           },
         })),
     }),
-    { name: "doc-builder", version: 1 },
+    {
+      name: "doc-builder",
+      version: 1,
+      migrate: (persistedState) => {
+        return persistedState;
+      },
+    },
   ),
 );
 
