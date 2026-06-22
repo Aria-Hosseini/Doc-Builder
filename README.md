@@ -8,7 +8,7 @@
   <img src="/signature/img/banner2.jpg" alt="Doc Builder Preview" width="900" />
 </div>
 
-[🚀 مشاهده پروژه](https://aria-hosseini.github.io/Doc-Builder/)
+[🚀 رفتن به داک بیلدر](https://aria-hosseini.github.io/Doc-Builder/)
 
 </div>
 
@@ -65,7 +65,7 @@ npm run build
 
 A simple and efficient tool for building technical documentation — with support for description and code blocks.
 
-[🚀 Live Demo](https://aria-hosseini.github.io/Doc-Builder/)
+[🚀 go to Doc Builder](https://aria-hosseini.github.io/Doc-Builder/)
 
 ## Features
 

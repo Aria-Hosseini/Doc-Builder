@@ -60,7 +60,7 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
                 {block.description && (
                   <p
                     dir={isRtl ? "rtl" : "ltr"}
-                    className={`text-zinc-300 text-sm leading-relaxed px-1 ${
+                    className={`text-zinc-300 text-sm leading-relaxed px-1 whitespace-pre-wrap ${
                       isRtl ? "text-right" : "text-left"
                     }`}
                   >
