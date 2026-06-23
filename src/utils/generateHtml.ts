@@ -2,17 +2,27 @@ import type { Block } from "../types/basetypes";
 import type { Theme } from "../types/basetypes";
 import { themes } from "../data/themes";
 
-export const generateHTML = (blocks: Block[], theme: Theme) => {
+export const generateHTML = (
+  blocks: Block[],
+  theme: Theme,
+  showSeprator: boolean,
+) => {
   const t = themes[theme];
 
   const blocksHTML = blocks
     .map(
       (block, index) => `
     <div class="block">
+    ${
+      showSeprator
+        ? `
       <div class="block-header">
         <span class="block-number">#${index + 1}</span>
         <div class="divider"></div>
       </div>
+    `
+        : ""
+    }
 
       ${
         block.type === "table" && block.tableData
@@ -118,7 +128,7 @@ export const generateHTML = (blocks: Block[], theme: Theme) => {
 
     .description {
       font-size: 0.875rem;
-      color: ${t.text}
+      color: ${t.text};
       line-height: 1.6;
       padding: 0 4px;
     }

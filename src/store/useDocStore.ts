@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { Docstate, TableCell, Theme } from "../types/basetypes";
+import type { Docstate, TableCell } from "../types/basetypes";
 
 const makeEmptyTable = (rows: number, cols: number): TableCell[][] =>
   Array.from({ length: rows }, () =>
