@@ -3,10 +3,45 @@ import useDocStore from "../store/useDocStore";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { themes } from "../data/themes";
+import { LuFilePenLine } from "react-icons/lu";
+import { useTranslation } from "react-i18next";
 
 const Preview = forwardRef<HTMLDivElement>((_, ref) => {
+  const { t } = useTranslation();
+
   const { blocks, meta } = useDocStore();
   const theme = themes[meta.theme];
+
+  const hasContent = blocks.some((block) => {
+    if (block.type === "table" && block.tableData) {
+      return block.tableData.some((row) =>
+        row.some((cell) => cell.content.trim() !== ""),
+      );
+    }
+
+    return block.description.trim() !== "" || block.code.trim() !== "";
+  });
+
+  if (!hasContent) {
+    return (
+      <div
+        id="preview"
+        ref={ref}
+        className="flex flex-col items-center justify-center min-h-100 gap-3 p-6"
+      >
+        <span className="text-5xl">
+          <LuFilePenLine size={40} className="text-zinc-500" />
+        </span>
+
+        <p className="text-zinc-500 text-sm select-none">
+          {t("preview.empty_title")}
+        </p>
+        <p className="text-zinc-500 text-[11px] select-none text-center leading-6">
+          {t("preview.empty_description")}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div

@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import useDocStore from "../store/useDocStore";
+import ToggleSwitch from "./ui/ToggleSwitch";
 
 export default function Setting() {
   const { meta, updateMeta } = useDocStore();
@@ -12,10 +13,10 @@ export default function Setting() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-lg font-bold">{t("settings.title")}</h2>
+      <h2 className="text-lg font-bold">{t("setting.title")}</h2>
 
       <div className="flex items-center justify-between">
-        <span>{t("settings.language")}</span>
+        <span>{t("setting.language")}</span>
 
         <button
           onClick={toggleLanguage}
@@ -26,12 +27,11 @@ export default function Setting() {
       </div>
 
       <div className="flex items-center justify-between">
-        <span>نمایش جداکننده بلاک‌ها</span>
+        <span>{t("setting.seprator")}</span>
 
-        <input
-          type="checkbox"
+        <ToggleSwitch
           checked={meta.showSeprator}
-          onChange={(e) => updateMeta("showSeprator", e.target.checked)}
+          onChange={(checked) => updateMeta("showSeprator", checked)}
         />
       </div>
     </div>

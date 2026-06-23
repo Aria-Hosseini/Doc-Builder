@@ -25,5 +25,14 @@
   "block_list":{
     "add_block" :"Add Text Block",
     "add_table":"Add Table Block"
+  },
+  "setting":{
+    "title": "setting",
+    "language": "language",
+    "seprator" : "show seprator"
+  },
+  "preview":{
+    "empty_title":"No content to display",
+    "empty_description":"Start by adding a text block or table and filling it with content."
   }
 }
