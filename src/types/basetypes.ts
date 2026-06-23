@@ -21,6 +21,7 @@ export interface DocMeta {
   createdAt: string;
   title: string;
   theme: Theme;
+  showSeprator: boolean;
 }
 
 export interface Docstate {
@@ -45,5 +46,5 @@ export interface Docstate {
   removeTableCol: (id: Block["id"], colIndex: number) => void;
   removeBlock: (id: Block["id"]) => void;
   reorderBlocks: (from: number, to: number) => void;
-  updateMeta: (field: keyof DocMeta, value: string) => void;
+  updateMeta: (field: keyof DocMeta, value: string | boolean) => void;
 }

@@ -24,12 +24,14 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
 
         return (
           <div key={block.id} className="flex flex-col gap-3">
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-zinc-500 bg-zinc-800 border border-zinc-700 rounded-full px-2 py-0.5">
-                #{index + 1}
-              </span>
-              <div className="h-px flex-1 bg-zinc-800" />
-            </div>
+            {meta.showSeprator && (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-zinc-500 bg-zinc-800 border border-zinc-700 rounded-full px-2 py-0.5">
+                  #{index + 1}
+                </span>
+                <div className="h-px flex-1 bg-zinc-800" />
+              </div>
+            )}
 
             {block.type === "table" && block.tableData && (
               <div className="overflow-x-auto rounded-lg border border-zinc-700">

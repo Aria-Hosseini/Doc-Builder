@@ -9,8 +9,13 @@ import { PiFilePdfBold } from "react-icons/pi";
 
 import { useTranslation } from "react-i18next";
 import ThemePicker from "./components/ui/ThemePicker";
+import { IoSettingsOutline } from "react-icons/io5";
+import { useState } from "react";
+import Setting from "./components/Setting";
 
 function App() {
+  const [isSettingOpen, setIsSettingOpen] = useState(false);
+
   const exportHTML = () => {
     const { blocks, meta } = useDocStore.getState();
     const html = generateHTML(blocks, meta.theme);
@@ -23,24 +28,35 @@ function App() {
     URL.revokeObjectURL(url);
   };
 
-  const { t, i18n } = useTranslation();
-
-  const toggleLanguage = () => {
-    const nextLang = i18n.language === "fa" ? "en" : "fa";
-    i18n.changeLanguage(nextLang);
-  };
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col">
       <header className="sticky top-0 z-100 bg-zinc-950 flex items-center justify-between px-6 py-4 border-b border-zinc-800">
         <div className="flex items-center gap-4">
           <span className="font-bold text-xl">{t("navbar.title")}</span>
+
           <button
-            onClick={toggleLanguage}
+            onClick={() => setIsSettingOpen(true)}
             className="px-3 py-1 cursor-pointer text-xs font-semibold rounded border border-gray-700 bg-zinc-900 hover:bg-zinc-800 transition-colors"
           >
-            {i18n.language === "fa" ? "Eng" : "فا"}
+            <IoSettingsOutline size={22} />
           </button>
+
+          {isSettingOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+              <div className="w-full max-w-md bg-zinc-900 border border-zinc-700 rounded-xl p-6 relative">
+                <button
+                  onClick={() => setIsSettingOpen(false)}
+                  className="absolute top-3 left-3 text-zinc-400 hover:text-white"
+                >
+                  ✕
+                </button>
+
+                <Setting />
+              </div>
+            </div>
+          )}
         </div>
         <div className="flex gap-3">
           <button

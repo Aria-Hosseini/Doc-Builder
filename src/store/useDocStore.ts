@@ -15,6 +15,7 @@ const useDocStore = create<Docstate>()(
         author: "",
         createdAt: new Date().toISOString(),
         theme: "dark",
+        showSeprator: true,
       },
       blocks: [
         {

@@ -30,8 +30,8 @@
 | ابزار | نسخه |
 |-------|-------|
 | React | 19 |
-| TypeScript | 5 |
-| Vite | 6 |
+| TypeScript | 6 |
+| Vite | 8 |
 | Tailwind CSS | 4 |
 | Zustand | 5 |
 
@@ -81,8 +81,8 @@ A simple and efficient tool for building technical documentation — with suppor
 | Tool | Version |
 |------|---------|
 | React | 19 |
-| TypeScript | 5 |
-| Vite | 6 |
+| TypeScript | 6 |
+| Vite | 8 |
 | Tailwind CSS | 4 |
 | Zustand | 5 |
 
