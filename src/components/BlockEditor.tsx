@@ -7,7 +7,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
 interface Props {
-  block: Block;
+  block: Extract<Block, { type: "text" }>;
 }
 
 export default function BlockEditor({ block }: Props) {

@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { IoTrashBin } from "react-icons/io5";
 
 interface Props {
-  block: Block;
+  block: Extract<Block, { type: "table" }>;
 }
 
 export default function TableBlock({ block }: Props) {

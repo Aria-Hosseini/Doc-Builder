@@ -24,7 +24,8 @@
   },
   "block_list":{
     "add_block" :"Add Text Block",
-    "add_table":"Add Table Block"
+    "add_table":"Add Table Block",
+    "add_tree":"Add Tree View"
   },
   "setting":{
     "title": "setting",
@@ -34,5 +35,12 @@
   "preview":{
     "empty_title":"No content to display",
     "empty_description":"Start by adding a text block or table and filling it with content."
-  }
+  },
+  "tree_editor": {
+  "title": "Tree View",
+  "delete_block": "Delete Block",
+  "empty": "No nodes added yet...",
+  "add_placeholder": "folder name",
+  "add_node": "Add"
+}
 }
