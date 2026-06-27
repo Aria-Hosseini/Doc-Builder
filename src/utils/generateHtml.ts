@@ -1,6 +1,17 @@
-import type { Block } from "../types/basetypes";
+import type { Block, TreeNode } from "../types/basetypes";
 import type { Theme } from "../types/basetypes";
 import { themes } from "../data/themes";
+
+// ─── Tree helper ─────────────────────────────────────────────
+const renderTreeNode = (node: TreeNode, depth: number = 0): string => `
+  <div class="tree-node" style="padding-left: ${depth * 16}px">
+    <div class="tree-node-title">
+      <span class="tree-icon">📁</span>
+      <span>${escapeHTML(node.title)}</span>
+    </div>
+    ${node.children?.map((child) => renderTreeNode(child, depth + 1)).join("") ?? ""}
+  </div>
+`;
 
 export const generateHTML = (
   blocks: Block[],
@@ -13,19 +24,19 @@ export const generateHTML = (
     .map(
       (block, index) => `
     <div class="block">
-    ${
-      showSeprator
-        ? `
-      <div class="block-header">
-        <span class="block-number">#${index + 1}</span>
-        <div class="divider"></div>
-      </div>
-    `
-        : ""
-    }
+      ${
+        showSeprator
+          ? `
+        <div class="block-header">
+          <span class="block-number">#${index + 1}</span>
+          <div class="divider"></div>
+        </div>
+      `
+          : ""
+      }
 
       ${
-        block.type === "table" && block.tableData
+        block.type === "table"
           ? `
         <div class="table-wrapper">
           <table>
@@ -53,7 +64,17 @@ export const generateHTML = (
       }
 
       ${
-        block.type !== "table" && block.description
+        block.type === "tree"
+          ? `
+        <div class="tree-wrapper">
+          ${block.treeData.map((node) => renderTreeNode(node)).join("")}
+        </div>
+      `
+          : ""
+      }
+
+      ${
+        block.type === "text" && block.description
           ? `
         <p dir="${block.isRtL ? "rtl" : "ltr"}" class="description">${block.description}</p>
       `
@@ -61,7 +82,7 @@ export const generateHTML = (
       }
 
       ${
-        block.type !== "table" && block.code
+        block.type === "text" && block.code
           ? `
         <div class="code-wrapper">
           <div class="code-header">
@@ -147,13 +168,8 @@ export const generateHTML = (
       color: #d4d4d8;
     }
 
-    tr.header-row {
-      background: #27272a;
-    }
-
-    tr:not(.header-row):nth-child(even) {
-      background: rgba(39, 39, 42, 0.4);
-    }
+    tr.header-row { background: #27272a; }
+    tr:not(.header-row):nth-child(even) { background: rgba(39,39,42,0.4); }
 
     th, td {
       border: 1px solid #3f3f46;
@@ -161,17 +177,41 @@ export const generateHTML = (
       text-align: left;
     }
 
-    th {
-      font-weight: 600;
-      color: #e4e4e7;
+    th { font-weight: 600; color: #e4e4e7; }
+
+    /* ── Tree ── */
+    .tree-wrapper {
+      border: 1px solid #3f3f46;
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
+
+    .tree-node {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .tree-node-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      color: ${t.text};
+    }
+
+    .tree-icon { font-size: 0.85rem; }
 
     /* ── Code ── */
     .code-wrapper {
       border: 1px solid #3f3f46;
       border-radius: 12px;
       overflow: hidden;
-      background: ${t.text};
     }
 
     .code-header {
@@ -183,17 +223,12 @@ export const generateHTML = (
       border-bottom: 1px solid #3f3f46;
     }
 
-    .lang {
-      font-size: 0.75rem;
-      color: #a1a1aa;
-      font-family: monospace;
-    }
-
+    .lang { font-size: 0.75rem; color: #a1a1aa; font-family: monospace; }
     .dots { display: flex; gap: 6px; }
     .dot { width: 12px; height: 12px; border-radius: 50%; }
-    .dot.red    { background: rgba(239, 68, 68, 0.83); }
-    .dot.yellow { background: rgba(234, 178, 8, 0.89); }
-    .dot.green  { background: rgba(34, 197, 94, 0.85); }
+    .dot.red    { background: rgba(239,68,68,0.83); }
+    .dot.yellow { background: rgba(234,178,8,0.89); }
+    .dot.green  { background: rgba(34,197,94,0.85); }
 
     pre {
       background: ${t.background};
