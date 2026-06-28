@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { TreeNode as TTreeNode } from "../types/basetypes";
 import useDocStore from "../store/useDocStore";
 import {
@@ -11,17 +11,30 @@ import {
   FiPlus,
 } from "react-icons/fi";
 
-interface Props {
+export interface Props {
   blockId: string;
   node: TTreeNode;
   depth?: number;
+  onOpen: (node: TTreeNode) => void;
 }
 
-export default function TreeNode({ blockId, node, depth = 0 }: Props) {
+export default function TreeNode({ blockId, node, depth = 0, onOpen }: Props) {
   const { addTreeNode, updateTreeNode, removeTreeNode } = useDocStore();
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [inputVal, setInputVal] = useState("");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    check();
+
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const handleAdd = () => {
     if (!inputVal.trim()) return;
@@ -37,8 +50,17 @@ export default function TreeNode({ blockId, node, depth = 0 }: Props) {
   };
 
   return (
-    <div style={{ paddingLeft: depth * 16 }}>
-      <div className="flex items-center gap-2 group py-1">
+    <div
+      onClick={(e) => {
+        e.stopPropagation();
+
+        if (isMobile) {
+          onOpen(node);
+        }
+      }}
+      style={{ paddingLeft: depth * 16 }}
+    >
+      <div className="flex items-center gap-2 group py-1 hover:bg-zinc-800 hover:px-1 hover:rounded-md">
         <FiFolder size={14} className="text-yellow-400 shrink-0" />
 
         {isEditing ? (
@@ -140,6 +162,7 @@ export default function TreeNode({ blockId, node, depth = 0 }: Props) {
           blockId={blockId}
           node={child}
           depth={depth + 1}
+          onOpen={onOpen}
         />
       ))}
     </div>

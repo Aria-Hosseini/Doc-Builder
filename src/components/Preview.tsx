@@ -68,7 +68,6 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
             </div>
           )}
 
-          {/* Table */}
           {block.type === "table" && (
             <div className="overflow-x-auto rounded-lg border border-zinc-700">
               <table className="w-full border-collapse text-sm text-zinc-300">
@@ -104,12 +103,8 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
             </div>
           )}
 
-          {/* Tree */}
-          {block.type === "tree" && (
-            <TreePreview block={block} /> // یه کامپوننت جدا برای preview درخت
-          )}
+          {block.type === "tree" && <TreePreview block={block} />}
 
-          {/* Text */}
           {block.type === "text" && (
             <>
               {block.description && (
