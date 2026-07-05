@@ -6,6 +6,7 @@ import { themes } from "../data/themes";
 import { LuFilePenLine } from "react-icons/lu";
 import { useTranslation } from "react-i18next";
 import TreePreview from "./TreePreview";
+import { fontClassMap } from "../utils/fonts/fonts";
 
 const Preview = forwardRef<HTMLDivElement>((_, ref) => {
   const { t } = useTranslation();
@@ -70,7 +71,10 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
 
           {block.type === "table" && (
             <div className="overflow-x-auto rounded-lg border border-zinc-700">
-              <table className="w-full border-collapse text-sm text-zinc-300">
+              <table
+                dir={block.isRtL ? "rtl" : "ltr"}
+                className="w-full border-collapse text-sm text-zinc-300"
+              >
                 <tbody>
                   {block.tableData.map((row, ri) => (
                     <tr
@@ -86,7 +90,9 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
                         return (
                           <Tag
                             key={ci}
-                            className="border border-zinc-700 px-4 py-2 text-left"
+                            className={`${fontClassMap[meta.font]} border border-zinc-700 px-4 py-2 ${
+                              block.isRtL ? "text-right" : "text-left"
+                            }`}
                           >
                             {cell.content || (
                               <span className="text-zinc-600 text-xs italic">
@@ -110,7 +116,7 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
               {block.description && (
                 <p
                   dir={block.isRtL ? "rtl" : "ltr"}
-                  className={`text-zinc-300 text-sm leading-relaxed px-1 whitespace-pre-wrap ${
+                  className={`${fontClassMap[meta.font]} text-zinc-300 text-sm leading-relaxed px-1 whitespace-pre-wrap ${
                     block.isRtL ? "text-right" : "text-left"
                   }`}
                   style={{ color: theme.text }}

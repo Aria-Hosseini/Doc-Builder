@@ -30,7 +30,8 @@
   "setting":{
     "title": "تنظیمات",
     "language": "زبان",
-    "seprator" : "نمایش جدا کننده"
+    "seprator" : "نمایش جدا کننده",
+    "choose_font":"انتخاب فونت"
   },
   "preview":{
     "empty_title":"محتوایی برای نمایش وجود ندارد",

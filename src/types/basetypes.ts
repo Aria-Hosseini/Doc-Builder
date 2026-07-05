@@ -1,5 +1,6 @@
 export type Theme = "dark" | "light" | "cream" | "green" | "yellow";
 
+export type Fonts = "vazirmatn" | "iransans" | "kook";
 export interface TableCell {
   content: string;
 }
@@ -41,6 +42,7 @@ export interface DocMeta {
   title: string;
   theme: Theme;
   showSeprator: boolean;
+  font: Fonts;
 }
 
 export interface Docstate {

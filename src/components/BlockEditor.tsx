@@ -5,13 +5,14 @@ import ToggleSwitch from "./ui/ToggleSwitch";
 import syntaxes from "../data/sytaxes.json";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
+import { fontClassMap } from "../utils/fonts/fonts";
 
 interface Props {
   block: Extract<Block, { type: "text" }>;
 }
 
 export default function BlockEditor({ block }: Props) {
-  const { updateBlock, removeBlock } = useDocStore();
+  const { updateBlock, removeBlock , meta } = useDocStore();
   const [hasCode, setHasCode] = useState(!!block.code);
   const langs = syntaxes.languages;
   const { t } = useTranslation();
@@ -35,7 +36,7 @@ export default function BlockEditor({ block }: Props) {
         placeholder={t("editor.block_placeholder")}
         rows={3}
         dir={isRtl ? "rtl" : "ltr"}
-        className={`w-full bg-zinc-800 text-zinc-100 placeholder-zinc-500 border border-zinc-700 rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:border-blue-500 transition-colors ${
+        className={`${fontClassMap[meta.font]} w-full bg-zinc-800 text-zinc-100 placeholder-zinc-500 border border-zinc-700 rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:border-blue-500 transition-colors ${
           isRtl ? "text-right" : "text-left"
         }`}
       />

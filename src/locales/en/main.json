@@ -28,9 +28,10 @@
     "add_tree":"Add Tree View"
   },
   "setting":{
-    "title": "setting",
-    "language": "language",
-    "seprator" : "show seprator"
+    "title": "Setting",
+    "language": "Language",
+    "seprator" : "Show Seprator",
+    "choose_font" : "Choose Font"
   },
   "preview":{
     "empty_title":"No content to display",

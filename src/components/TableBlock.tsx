@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { IoTrashBin } from "react-icons/io5";
+import { fontClassMap } from "../utils/fonts/fonts";
 
 interface Props {
   block: Extract<Block, { type: "table" }>;
@@ -17,6 +18,8 @@ export default function TableBlock({ block }: Props) {
     removeTableRow,
     removeTableCol,
     removeBlock,
+    updateBlock,
+    meta,
   } = useDocStore();
 
   const { t } = useTranslation();
@@ -25,6 +28,7 @@ export default function TableBlock({ block }: Props) {
   const colCount = tableData[0]?.length ?? 0;
 
   const cellRefs = useRef<(HTMLTextAreaElement | null)[][]>([]);
+  const isRtl = block.isRtL !== undefined ? block.isRtL : true;
 
   const focusCell = (row: number, col: number) => {
     cellRefs.current[row]?.[col]?.focus();
@@ -58,6 +62,13 @@ export default function TableBlock({ block }: Props) {
         <span className="text-xs text-zinc-500 border border-zinc-700 rounded-lg px-2 py-1">
           {t("table_editor.table_dimension")} {tableData.length} × {colCount}
         </span>
+
+        <button
+          onClick={() => updateBlock(block.id, "isRtL", !isRtl)}
+          className="text-xs text-zinc-400 hover:text-blue-400 cursor-pointer border border-zinc-700 hover:border-blue-500 rounded-lg px-3 py-1.5 transition-colors"
+        >
+          {isRtl ? t("editor.ltr_buttom") : t("editor.rtl_buttom")}
+        </button>
         <button
           onClick={() => removeBlock(block.id)}
           className="text-xs text-zinc-500 flex gap-2 items-center hover:text-red-400 border border-zinc-700 hover:border-red-500 rounded-lg px-3 py-1.5 transition-colors cursor-pointer"
@@ -68,7 +79,7 @@ export default function TableBlock({ block }: Props) {
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-zinc-700">
-        <table className="w-full border-collapse">
+        <table dir={isRtl ? "rtl" : "ltr"} className="w-full border-collapse">
           <thead>
             <tr className="bg-zinc-800">
               <th className="w-8 border-b border-r border-zinc-700" />
@@ -132,7 +143,8 @@ export default function TableBlock({ block }: Props) {
                         }
                         onKeyDown={(e) => handleKeyDown(e, ri, ci)}
                         rows={1}
-                        className="w-full min-w-25 bg-transparent text-zinc-200 text-sm px-3 py-2 resize-none focus:outline-none focus:bg-zinc-800/60 transition-colors placeholder-zinc-700"
+                        dir={isRtl ? "rtl" : "ltr"}
+                        className={`${fontClassMap[meta.font]} w-full min-w-25 bg-transparent text-zinc-200 text-sm px-3 py-2 resize-none focus:outline-none focus:bg-zinc-800/60 transition-colors placeholder-zinc-700`}
                         placeholder="..."
                         style={{ height: "auto", minHeight: "36px" }}
                         onInput={(e) => {

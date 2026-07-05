@@ -1,9 +1,14 @@
 import type { Block, TreeNode } from "../types/basetypes";
+import { fontClassMap } from "../utils/fonts/fonts";
+import useDocStore from "../store/useDocStore";
+
 
 function RenderNode({ node, depth = 0 }: { node: TreeNode; depth?: number }) {
+
+  const {meta} = useDocStore();
   return (
     <div style={{ paddingLeft: depth * 16 }}>
-      <span className="text-zinc-300 text-sm">📁 {node.title}</span>
+      <span className={`text-zinc-300 text-sm ${fontClassMap[meta.font]}`}>📁 {node.title}</span>
       {node.children?.map((child) => (
         <RenderNode key={child.id} node={child} depth={depth + 1} />
       ))}

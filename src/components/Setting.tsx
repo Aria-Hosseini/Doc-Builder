@@ -1,6 +1,8 @@
 import { useTranslation } from "react-i18next";
 import useDocStore from "../store/useDocStore";
 import ToggleSwitch from "./ui/ToggleSwitch";
+import type { Fonts } from "../types/basetypes";
+import { fontOptions } from "../utils/fonts/fonts";
 
 export default function Setting() {
   const { meta, updateMeta } = useDocStore();
@@ -33,6 +35,22 @@ export default function Setting() {
           checked={meta.showSeprator}
           onChange={(checked) => updateMeta("showSeprator", checked)}
         />
+      </div>
+
+      <div className="flex items-center justify-between">
+        <span>{t("setting.choose_font")}</span>
+
+        <select
+          value={meta.font}
+          className="w-fit bg-zinc-800 text-zinc-300 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500 transition-colors cursor-pointer"
+          onChange={(e) => updateMeta("font", e.target.value as Fonts)}
+        >
+          {fontOptions.map((font) => (
+            <option key={font.value} value={font.value}>
+              {font.label}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   );

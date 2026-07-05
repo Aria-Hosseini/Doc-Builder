@@ -25,3 +25,24 @@
 .animate-slide-down {
   animation: slideDown 0.25s ease forwards;
 }
+
+@font-face {
+  font-family: "IRANSans";
+  src: url("/fonts/iransans/IRANSansX-Medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn/Vazir-Medium.woff2") format("woff2");
+}
+
+
+
+.font-iransans {
+  font-family: "IRANSans";
+}
+
+.font-vazirmatn {
+  font-family: "Vazirmatn";
+}
+

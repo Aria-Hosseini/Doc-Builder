@@ -58,6 +58,7 @@ const useDocStore = create<Docstate>()(
         createdAt: new Date().toISOString(),
         theme: "dark",
         showSeprator: true,
+        font: "iransans",
       },
       blocks: [
         {
@@ -80,12 +81,11 @@ const useDocStore = create<Docstate>()(
               description: "",
               code: "",
               lang: "typescript",
-              isRtL: true,
+              isRtL: false,
             },
           ],
         })),
 
-      // ── Table block ──
       addTableBlock: (rows, cols) =>
         set((state) => ({
           blocks: [
@@ -104,9 +104,11 @@ const useDocStore = create<Docstate>()(
 
       updateBlock: (id, field, value) =>
         set((state) => ({
-          blocks: state.blocks.map((b) =>
-            b.id === id ? { ...b, [field]: value } : b,
-          ),
+          blocks: state.blocks.map((b) => {
+            if (b.id !== id) return b;
+            if (b.type === "tree") return b;
+            return { ...b, [field]: value };
+          }),
         })),
 
       updateTableCell: (id, row, col, content) =>

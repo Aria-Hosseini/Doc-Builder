@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { TreeNode as TTreeNode } from "../types/basetypes";
 import useDocStore from "../store/useDocStore";
+import { fontClassMap } from "../utils/fonts/fonts";
 import {
   FiFolder,
   FiFolderPlus,
@@ -19,7 +20,7 @@ export interface Props {
 }
 
 export default function TreeNode({ blockId, node, depth = 0, onOpen }: Props) {
-  const { addTreeNode, updateTreeNode, removeTreeNode } = useDocStore();
+  const { addTreeNode, updateTreeNode, removeTreeNode , meta } = useDocStore();
   const [isAdding, setIsAdding] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [inputVal, setInputVal] = useState("");
@@ -70,7 +71,7 @@ export default function TreeNode({ blockId, node, depth = 0, onOpen }: Props) {
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleRename()}
-              className="flex-1 bg-zinc-800 text-zinc-200 border border-blue-500 rounded-md px-2 py-0.5 text-sm focus:outline-none"
+              className={`${fontClassMap[meta.font]} flex-1 bg-zinc-800 text-zinc-200 border border-blue-500 rounded-md px-2 py-0.5 text-sm focus:outline-none`}
             />
             <button
               onClick={handleRename}
@@ -87,9 +88,9 @@ export default function TreeNode({ blockId, node, depth = 0, onOpen }: Props) {
           </>
         ) : (
           <>
-            <span className="flex-1 text-sm text-zinc-300">{node.title}</span>
+            <span className={`${fontClassMap[meta.font]} flex-1 text-sm text-zinc-300`}>{node.title}</span>
 
-            <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className={`${fontClassMap[meta.font]} flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity`}>
               <button
                 onClick={() => {
                   setInputVal(node.title);
@@ -136,7 +137,7 @@ export default function TreeNode({ blockId, node, depth = 0, onOpen }: Props) {
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleAdd()}
-            className="flex-1 bg-zinc-800 text-zinc-200 placeholder-zinc-600 border border-zinc-700 rounded-md px-2 py-0.5 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+            className={`${fontClassMap[meta.font]} flex-1 bg-zinc-800 text-zinc-200 placeholder-zinc-600 border border-zinc-700 rounded-md px-2 py-0.5 text-sm focus:outline-none focus:border-blue-500 transition-colors`}
           />
           <button
             onClick={handleAdd}

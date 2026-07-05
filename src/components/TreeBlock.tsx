@@ -13,13 +13,14 @@ import {
   FiTrash2,
   FiX,
 } from "react-icons/fi";
+import { fontClassMap } from "../utils/fonts/fonts";
 
 interface Props {
   block: Extract<Block, { type: "tree" }>;
 }
 
 export default function TreeBlock({ block }: Props) {
-  const { addTreeNode, removeBlock, removeTreeNode, updateTreeNode } =
+  const { addTreeNode, removeBlock, removeTreeNode, updateTreeNode , meta } =
     useDocStore();
   const [inputVal, setInputVal] = useState("");
   const [inputEdit, setInputEdit] = useState("");
@@ -90,7 +91,7 @@ export default function TreeBlock({ block }: Props) {
           value={inputVal}
           onChange={(e) => setInputVal(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleAddRoot()}
-          className="flex-1 bg-zinc-800 text-zinc-200 placeholder-zinc-600 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+          className={`${fontClassMap[meta.font]} flex-1 bg-zinc-800 text-zinc-200 placeholder-zinc-600 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500 transition-colors`}
         />
         <button
           onClick={handleAddRoot}
@@ -113,11 +114,10 @@ export default function TreeBlock({ block }: Props) {
             onClick={(e) => e.stopPropagation()}
             className="w-105 rounded-xl border border-zinc-700 bg-zinc-900 shadow-2xl p-5"
           >
-            {/* Header */}
             <div className="flex items-center justify-between mb-5">
               <div className="flex items-center gap-2">
                 <FiFolder className="text-yellow-400" size={18} />
-                <span className="text-zinc-100 font-medium">
+                <span className={`text-zinc-100 font-medium ${fontClassMap[meta.font]}`}>
                   {selectedNode.title}
                 </span>
               </div>
@@ -127,13 +127,12 @@ export default function TreeBlock({ block }: Props) {
                   setOpenAdd(false);
                   setOpenEdit(false);
                 }}
-                className="text-zinc-500 hover:text-white"
+                className={`${fontClassMap[meta.font]} text-zinc-500 hover:text-white`}
               >
                 <FiX size={20} />
               </button>
             </div>
 
-            {/* Action buttons */}
             <div className="grid grid-cols-3 gap-3 mb-3">
               <button
                 onClick={() => {
@@ -175,7 +174,6 @@ export default function TreeBlock({ block }: Props) {
               </button>
             </div>
 
-            {/* Rename input — shown below buttons */}
             {openEdit && (
               <div className="flex items-center gap-2 pt-1">
                 <input
@@ -196,7 +194,6 @@ export default function TreeBlock({ block }: Props) {
               </div>
             )}
 
-            {/* Add child input — shown below buttons */}
             {openAdd && (
               <div className="flex items-center gap-2 pt-1">
                 <input
@@ -209,7 +206,7 @@ export default function TreeBlock({ block }: Props) {
                 />
                 <button
                   onClick={handleAddChild}
-                  className="flex items-center justify-center w-8 h-8 rounded-lg border border-green-600 bg-green-900/40 hover:bg-green-800/60 text-green-400 transition shrink-0"
+                  className={`${fontClassMap[meta.font]} flex items-center justify-center w-8 h-8 rounded-lg border border-green-600 bg-green-900/40 hover:bg-green-800/60 text-green-400 transition shrink-0`}
                   aria-label="confirm add"
                 >
                   <FiCheck size={16} />
