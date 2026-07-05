@@ -2,7 +2,6 @@ import type { Block, TreeNode } from "../types/basetypes";
 import type { Theme } from "../types/basetypes";
 import { themes } from "../data/themes";
 
-// ─── Tree helper ─────────────────────────────────────────────
 const renderTreeNode = (node: TreeNode, depth: number = 0): string => `
   <div class="tree-node" style="padding-left: ${depth * 16}px">
     <div class="tree-node-title">
@@ -73,13 +72,19 @@ export const generateHTML = (
           : ""
       }
 
-      ${
-        block.type === "text" && block.description
-          ? `
-        <p dir="${block.isRtL ? "rtl" : "ltr"}" class="description">${block.description}</p>
-      `
-          : ""
-      }
+     ${
+       block.type === "text" && block.description
+         ? `
+      <p
+        dir="${block.isRtL ? "rtl" : "ltr"}"
+        class="description"
+        style="font-size:${block.fontsize};"
+      >
+        ${escapeHTML(block.description)}
+      </p>
+    `
+         : ""
+     }
 
       ${
         block.type === "text" && block.code
@@ -147,12 +152,13 @@ export const generateHTML = (
       background: ${t.border};
     }
 
-    .description {
-      font-size: 0.875rem;
-      color: ${t.text};
-      line-height: 1.6;
-      padding: 0 4px;
-    }
+  .description {
+  color: ${t.text};
+  line-height: 1.6;
+  padding: 0 4px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
 
     /* ── Table ── */
     .table-wrapper {

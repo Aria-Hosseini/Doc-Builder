@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function BlockEditor({ block }: Props) {
-  const { updateBlock, removeBlock , meta } = useDocStore();
+  const { updateBlock, removeBlock, meta } = useDocStore();
   const [hasCode, setHasCode] = useState(!!block.code);
   const langs = syntaxes.languages;
   const { t } = useTranslation();
@@ -28,6 +28,21 @@ export default function BlockEditor({ block }: Props) {
         >
           {isRtl ? t("editor.ltr_buttom") : t("editor.rtl_buttom")}
         </button>
+
+        <select
+          value={block.fontsize}
+          className="w-fit bg-zinc-800 text-zinc-300 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500 transition-colors cursor-pointer"
+          onChange={(e) => updateBlock(block.id, "fontsize", e.target.value)}
+        >
+          <option value="12px">12</option>
+          <option value="14px">14</option>
+          <option value="16px">16</option>
+          <option value="18px">18</option>
+          <option value="20px">20</option>
+          <option value="24px">24</option>
+          <option value="28px">28</option>
+          <option value="32px">32</option>
+        </select>
       </div>
 
       <textarea
@@ -39,6 +54,9 @@ export default function BlockEditor({ block }: Props) {
         className={`${fontClassMap[meta.font]} w-full bg-zinc-800 text-zinc-100 placeholder-zinc-500 border border-zinc-700 rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:border-blue-500 transition-colors ${
           isRtl ? "text-right" : "text-left"
         }`}
+        style={{
+          fontSize: block.fontsize,
+        }}
       />
 
       <ToggleSwitch

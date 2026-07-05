@@ -1,6 +1,9 @@
 export type Theme = "dark" | "light" | "cream" | "green" | "yellow";
 
 export type Fonts = "vazirmatn" | "iransans" | "kook";
+
+export type FontSize = "12px" | "14px" | "16px" | "18px" | "20px" | "24px" | "28px" | "32px";
+
 export interface TableCell {
   content: string;
 }
@@ -19,6 +22,7 @@ export type Block =
       code: string;
       lang: string;
       isRtL: boolean;
+      fontsize : FontSize;
     }
   | {
       id: string;
@@ -52,8 +56,8 @@ export interface Docstate {
   addBlock: () => void;
   updateBlock: (
     id: string,
-    field: "description" | "code" | "lang" | "isRtL",
-    value: string | boolean,
+    field: "description" | "code" | "lang" | "isRtL" | "fontsize",
+    value: string | boolean | number,
   ) => void;
 
   addTableBlock: (rows: number, cols: number) => void;

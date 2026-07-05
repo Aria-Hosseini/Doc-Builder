@@ -116,10 +116,13 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
               {block.description && (
                 <p
                   dir={block.isRtL ? "rtl" : "ltr"}
-                  className={`${fontClassMap[meta.font]} text-zinc-300 text-sm leading-relaxed px-1 whitespace-pre-wrap ${
+                  className={`${fontClassMap[meta.font]} text-zinc-300 leading-relaxed px-1 whitespace-pre-wrap ${
                     block.isRtL ? "text-right" : "text-left"
                   }`}
-                  style={{ color: theme.text }}
+                  style={{
+                    color: theme.text,
+                    fontSize: block.fontsize,
+                  }}
                 >
                   {block.description}
                 </p>

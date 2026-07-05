@@ -68,6 +68,7 @@ const useDocStore = create<Docstate>()(
           code: "",
           lang: "typescript",
           isRtL: true,
+          fontsize: "14px",
         },
       ],
 
@@ -82,6 +83,7 @@ const useDocStore = create<Docstate>()(
               code: "",
               lang: "typescript",
               isRtL: false,
+              fontsize: "14px",
             },
           ],
         })),
@@ -106,8 +108,17 @@ const useDocStore = create<Docstate>()(
         set((state) => ({
           blocks: state.blocks.map((b) => {
             if (b.id !== id) return b;
+
             if (b.type === "tree") return b;
-            return { ...b, [field]: value };
+
+            if (field === "fontsize" && b.type !== "text") {
+              return b;
+            }
+
+            return {
+              ...b,
+              [field]: value,
+            };
           }),
         })),
 
