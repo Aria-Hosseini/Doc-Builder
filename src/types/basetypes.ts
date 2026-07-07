@@ -2,7 +2,15 @@ export type Theme = "dark" | "light" | "cream" | "green" | "yellow";
 
 export type Fonts = "vazirmatn" | "iransans" | "kook";
 
-export type FontSize = "12px" | "14px" | "16px" | "18px" | "20px" | "24px" | "28px" | "32px";
+export type FontSize =
+  | "12px"
+  | "14px"
+  | "16px"
+  | "18px"
+  | "20px"
+  | "24px"
+  | "28px"
+  | "32px";
 
 export interface TableCell {
   content: string;
@@ -22,7 +30,7 @@ export type Block =
       code: string;
       lang: string;
       isRtL: boolean;
-      fontsize : FontSize;
+      fontsize: FontSize;
     }
   | {
       id: string;
@@ -38,6 +46,21 @@ export type Block =
       type: "tree";
       description: string;
       treeData: TreeNode[];
+    }
+  | {
+      id: string;
+      type: "quote";
+      text: string;
+      isRtl: boolean;
+      fontsize: FontSize;
+    }
+  | {
+      id: string;
+      type: "image";
+      src: string;
+      alt: string;
+      width: number;
+      align: "left" | "center" | "right";
     };
 
 export interface DocMeta {
@@ -80,6 +103,20 @@ export interface Docstate {
   ) => void;
   updateTreeNode: (blockId: string, nodeId: string, title: string) => void;
   removeTreeNode: (blockId: string, nodeId: string) => void;
+
+  addQuoteBlock: () => void;
+  updateQuote: (
+    id: string,
+    field: "text" | "isRtl" | "fontsize",
+    value: string | boolean | string,
+  ) => void;
+
+  addImageBlock: () => void;
+  updateImageBlock: (
+    id: string,
+    field: "src" | "alt" | "width" | "align",
+    value: string | number,
+  ) => void;
 
   removeBlock: (id: string) => void;
   reorderBlocks: (from: number, to: number) => void;

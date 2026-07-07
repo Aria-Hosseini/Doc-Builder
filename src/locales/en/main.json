@@ -7,8 +7,9 @@
     "selectTheme" : "Select Theme"
   },
   "editor": {
-    "block_placeholder": "Block description...",
+    "block_placeholder": "Write Something...",
     "code_placeholder": "Block code",
+    "quote_placeholder":"Write Something...",
     "has_code": "Has code",
     "delete_block": "Delete Block",
     "rtl_buttom":"RTL →",
@@ -25,7 +26,10 @@
   "block_list":{
     "add_block" :"Add Text Block",
     "add_table":"Add Table Block",
-    "add_tree":"Add Tree View"
+    "add_tree":"Add Tree Block",
+    "more_tools" : "More Blocks",
+    "add_image":"Add Image Block",
+    "add_quote" : "Add Quote Block"
   },
   "setting":{
     "title": "Setting",
@@ -43,5 +47,13 @@
   "empty": "No nodes added yet...",
   "add_placeholder": "folder name",
   "add_node": "Add"
-}
+  },
+  "image_block":{
+    "width" :"Image Width",
+    "left":"Left",
+    "center":"Center",
+    "right":"Right",
+    "alt" :"Image Alt",
+    "attach":"Click Here To Attach Image"
+  }
 }

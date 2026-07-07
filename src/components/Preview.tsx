@@ -5,8 +5,10 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { themes } from "../data/themes";
 import { LuFilePenLine } from "react-icons/lu";
 import { useTranslation } from "react-i18next";
-import TreePreview from "./TreePreview";
+import TreePreview from "./preview/TreePreview";
 import { fontClassMap } from "../utils/fonts/fonts";
+import QuotePreview from "./preview/QuotePreview";
+import ImagePreview from "./preview/ImagePreview";
 
 const Preview = forwardRef<HTMLDivElement>((_, ref) => {
   const { t } = useTranslation();
@@ -22,6 +24,12 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
     }
     if (block.type === "tree") {
       return block.treeData.length > 0;
+    }
+    if (block.type === "quote") {
+      return block.text.length > 0;
+    }
+    if (block.type === "image") {
+      return block.src.length > 0;
     }
     return block.description.trim() !== "" || block.code.trim() !== "";
   });
@@ -110,6 +118,10 @@ const Preview = forwardRef<HTMLDivElement>((_, ref) => {
           )}
 
           {block.type === "tree" && <TreePreview block={block} />}
+
+          {block.type === "quote" && <QuotePreview block={block} />}
+
+          {block.type === "image" && <ImagePreview block={block} />}
 
           {block.type === "text" && (
             <>

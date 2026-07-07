@@ -7,8 +7,9 @@
     "selectTheme" : "انتخاب تم"
   },
   "editor": {
-    "block_placeholder": "توضیحات بلاک...",
+    "block_placeholder": "چیزی بنویسید...",
     "code_placeholder": "کد بلاک...",
+    "quote_placeholder":"چیزی بنویسید...",
     "has_code": "دارای کد است",
     "delete_block": "حذف بلاک",
     "rtl_buttom":"→ راست‌چین کن",
@@ -25,7 +26,10 @@
   "block_list":{
     "add_block" :"افزودن بلاک متنی",
     "add_table":"افزودن بلاک جدول",
-    "add_tree":"افزودن ساختار درختی"
+    "add_tree":"افزودن بلاک درختی",
+    "more_tools" : "بلاک های بیشتر",
+    "add_image":"افزودن بلاک عکس",
+    "add_quote" : "افزودن بلاک نقل قول"
   },
   "setting":{
     "title": "تنظیمات",
@@ -43,5 +47,13 @@
   "empty": "هنوز نودی اضافه نشده...",
   "add_placeholder": "نام فولدر...",
   "add_node": "افزودن"
-}
+  },
+  "image_block":{
+    "width" :"عرض تصویر",
+    "left":"چپ چین",
+    "center":"وسط چین",
+    "right":"راست چین",
+    "alt" :"تصویر alt",
+    "attach":"برای قرار دادن عکس کلیک کنید"
+  }
 }

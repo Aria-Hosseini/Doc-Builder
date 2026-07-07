@@ -22,7 +22,7 @@ export const themes = {
   },
   yellow: {
     background: "#fff763",
-    text: "#14532d",
+    text: "#4f4b1b",
     border: "#22c55e",
   },
 } as const;

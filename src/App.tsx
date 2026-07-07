@@ -74,11 +74,11 @@ function App() {
           </button>
 
           {isSettingOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-              <div className="w-full max-w-md bg-zinc-900 border border-zinc-700 rounded-xl p-8 m-2 relative">
+            <div onClick={(e)=>{if(e.target === e.currentTarget){setIsSettingOpen(false)}}}  className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+              <div onClick={(e)=> e.stopPropagation()} className="w-full max-w-md bg-zinc-900 border border-zinc-700 rounded-xl p-8 m-2 relative">
                 <button
                   onClick={() => setIsSettingOpen(false)}
-                  className="absolute top-3 left-3 text-zinc-400 hover:text-white"
+                  className="absolute top-3 left-3 text-zinc-400 hover:text-white cursor-pointer"
                 >
                   ✕
                 </button>

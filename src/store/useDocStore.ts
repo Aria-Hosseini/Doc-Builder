@@ -198,6 +198,35 @@ const useDocStore = create<Docstate>()(
           ],
         })),
 
+      addQuoteBlock: () =>
+        set((state) => ({
+          blocks: [
+            ...state.blocks,
+            {
+              id: crypto.randomUUID(),
+              type: "quote",
+              text: "",
+              isRtl: false,
+              fontsize: "14px",
+            },
+          ],
+        })),
+
+      addImageBlock: () =>
+        set((state) => ({
+          blocks: [
+            ...state.blocks,
+            {
+              id: crypto.randomUUID(),
+              type: "image",
+              src: "",
+              alt: "",
+              width: 500,
+              align: "center",
+            },
+          ],
+        })),
+
       addTreeNode: (blockId, parentId, title) =>
         set((state) => ({
           blocks: state.blocks.map((b) => {
@@ -226,6 +255,30 @@ const useDocStore = create<Docstate>()(
           }),
         })),
 
+      updateQuote: (id, field, value) =>
+        set((state) => ({
+          blocks: state.blocks.map((b) => {
+            if (b.id !== id || b.type !== "quote") return b;
+
+            return {
+              ...b,
+              [field]: value,
+            };
+          }),
+        })),
+
+      updateImageBlock: (id, field, value) =>
+        set((state) => ({
+          blocks: state.blocks.map((b) => {
+            if (b.id !== id || b.type !== "image") return b;
+
+            return {
+              ...b,
+              [field]: value,
+            };
+          }),
+        })),
+
       removeBlock: (id) =>
         set((state) => ({
           blocks: state.blocks.filter((b) => b.id !== id),
@@ -246,7 +299,7 @@ const useDocStore = create<Docstate>()(
     }),
     {
       name: "doc-builder",
-      version: 2,
+      version: 4,
       migrate: (persistedState) => {
         return persistedState;
       },

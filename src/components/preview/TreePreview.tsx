@@ -1,6 +1,6 @@
-import type { Block, TreeNode } from "../types/basetypes";
-import { fontClassMap } from "../utils/fonts/fonts";
-import useDocStore from "../store/useDocStore";
+import type { Block, TreeNode } from "../../types/basetypes";
+import { fontClassMap } from "../../utils/fonts/fonts";
+import useDocStore from "../../store/useDocStore";
 
 
 function RenderNode({ node, depth = 0 }: { node: TreeNode; depth?: number }) {
