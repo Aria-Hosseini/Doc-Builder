@@ -86,6 +86,34 @@ export const generateHTML = (
          : ""
      }
 
+     ${
+       block.type === "quote"
+         ? `
+      <blockquote
+        dir="${block.isRtl ? "rtl" : "ltr"}"
+        class="quote"
+        style="font-size:${block.fontsize};"
+      >
+        ${escapeHTML(block.text)}
+      </blockquote>
+    `
+         : ""
+     }
+
+     ${
+       block.type === "image"
+         ? `
+      <div class="image-wrapper image-${block.align}">
+        <img
+          src="${block.src}"
+          alt="${escapeHTML(block.alt)}"
+          style="width:${block.width}px"
+        />
+      </div>
+    `
+         : ""
+     }
+
       ${
         block.type === "text" && block.code
           ? `
@@ -151,6 +179,45 @@ export const generateHTML = (
       height: 1px;
       background: ${t.border};
     }
+
+    .quote{
+      border-right:4px solid #3b82f6;
+      background:#27272a;
+      color:#ffffff;
+      padding:16px;
+      border-radius:10px;
+      line-height:1.8;
+      white-space:pre-wrap;
+    }
+
+    .image-wrapper{
+      margin:16px 0;
+    }
+
+.image-wrapper img{
+    border-radius:10px;
+    display:block;
+    max-width:100%;
+    height:auto;
+}
+
+.image-left{
+    text-align:left;
+}
+
+.image-center{
+    text-align:center;
+}
+
+.image-right{
+    text-align:right;
+}
+
+.image-left img,
+.image-center img,
+.image-right img{
+    display:inline-block;
+}
 
   .description {
   color: ${t.text};
